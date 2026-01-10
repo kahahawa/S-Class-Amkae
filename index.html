@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BABEL CORP. | IMAGE ARCHIVE V4</title>
+    <style>
+        :root {
+            --bg-color: #050505;
+            --card-bg: #111;
+            --accent-red: #cc2222;
+            --text-main: #eee;
+            --border: #333;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Consolas', 'Malgun Gothic', sans-serif;
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- 상단 메뉴 --- */
+        .control-panel {
+            position: sticky;
+            top: 0;
+            background: rgba(10, 10, 10, 0.98);
+            border-bottom: 1px solid #333;
+            padding: 15px;
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .brand {
+            font-weight: bold;
+            color: #fff;
+            margin-right: 15px;
+            font-size: 1.1rem;
+            letter-spacing: 1px;
+        }
+
+        button {
+            background: #1a1a1a;
+            color: #888;
+            border: 1px solid #333;
+            padding: 8px 16px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.2s;
+            text-transform: uppercase;
+            font-size: 0.9rem;
+        }
+
+        button:hover {
+            background: #252525;
+            color: #fff;
+            border-color: #666;
+        }
+        
+        button.active {
+            background: #222;
+            color: #fff;
+            border: 1px solid var(--accent-red);
+            border-left: 4px solid var(--accent-red);
+        }
+
+        /* --- 섹션 구분 --- */
+        .section-divider {
+            max-width: 1600px;
+            margin: 40px auto 10px auto;
+            padding: 10px 20px;
+            border-bottom: 1px solid #222;
+            font-size: 1.1rem;
+            font-weight: bold;
+            color: #888;
+            display: flex;
+            align-items: center;
+        }
+        
+        .section-divider span {
+            color: var(--accent-red);
+            margin-right: 10px;
+        }
+
+        /* --- 그리드 레이아웃 (수정됨) --- */
+        .gallery-grid {
+            display: grid;
+            /* [중요 수정] 무조건 4등분 고정 */
+            grid-template-columns: repeat(4, 1fr);
+            gap: 15px;
+            padding: 0 20px 20px 20px;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        /* 모바일에서는 너무 좁지 않게 2개로 조정 (선택 사항) */
+        @media (max-width: 768px) {
+            .gallery-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        /* --- 이미지 카드 --- */
+        .img-card {
+            background: #000;
+            border: 1px solid #222;
+            position: relative;
+            aspect-ratio: 1 / 1; 
+            overflow: hidden;
+            transition: 0.2s;
+            cursor: pointer;
+            width: 100%; /* 너비 꽉 채우기 */
+        }
+
+        .img-card:hover {
+            border-color: #666;
+            filter: brightness(1.1);
+            transform: scale(1.02); /* 살짝 커지는 효과 추가 */
+            z-index: 10;
+        }
+
+        .img-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+
+        .label {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            background: rgba(0,0,0,0.7);
+            color: #ccc;
+            font-size: 12px; /* 텍스트도 살짝 키움 */
+            padding: 4px 8px;
+            pointer-events: none;
+        }
+
+        .msg-box {
+            text-align: center;
+            padding: 60px;
+            color: #555;
+        }
+
+        /* --- 이미지 확대 모달 --- */
+        .modal {
+            display: none; 
+            position: fixed; 
+            z-index: 2000; 
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%; 
+            background-color: rgba(0,0,0,0.9);
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+        }
+
+        .modal-content {
+            max-width: 95%;
+            max-height: 90%;
+            object-fit: contain;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+            border: 1px solid #333;
+        }
+
+        .modal-caption {
+            margin-top: 15px;
+            color: #ccc;
+            font-size: 14px;
+            font-family: monospace;
+        }
+
+        .close-hint {
+            position: absolute;
+            top: 20px;
+            right: 30px;
+            color: #888;
+            font-size: 30px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="control-panel">
+    <div class="brand">BABEL ARCHIVE</div>
+    <button onclick="renderView('yun')" id="btn-yun">윤서희</button>
+    <button onclick="renderView('kang')" id="btn-kang">강태성</button>
+    <button onclick="renderView('baek')" id="btn-baek">백설아</button>
+    <button onclick="renderView('jessica')" id="btn-jessica">제시카</button>
+    <button onclick="renderView('ntr')" id="btn-ntr">NTR 모드</button>
+</div>
+
+<div id="main-content">
+    <div class="msg-box">
+        // READY //<br>상단 메뉴를 선택하세요.
+    </div>
+</div>
+
+<div id="imgModal" class="modal" onclick="closeModal()">
+    <span class="close-hint">&times;</span>
+    <img class="modal-content" id="modalImg">
+    <div class="modal-caption" id="modalCaption"></div>
+</div>
+
+<script>
+    const baseUrl = "https://images.httpskaha.me/R1A/";
+
+    // 캐릭터 설정
+    const db = {
+        'yun':  { name: '윤서희', folder: 'A1', code: 'Yun_.' },
+        'kang': { name: '강태성', folder: 'A2', code: 'Kang_.' },
+        'baek': { name: '백설아', folder: 'A3', code: 'Baek_.' },
+        'jessica': { name: '제시카', folder: 'A4', code: 'Jessica_.' },
+        'ntr':  { name: 'NTR 상황', folder: 'A2', code: 'B_.' }
+    };
+
+    const scanStart = 1;
+    const scanEnd = 120;
+
+    let currentRenderId = 0;
+
+    function renderView(charKey) {
+        // 버튼 스타일 초기화
+        document.querySelectorAll('button').forEach(b => b.classList.remove('active'));
+        document.getElementById('btn-' + charKey).classList.add('active');
+
+        const contentDiv = document.getElementById('main-content');
+        contentDiv.innerHTML = '<div class="msg-box">LOADING...</div>';
+
+        const data = db[charKey];
+        currentRenderId++;
+        const myId = currentRenderId;
+
+        setTimeout(() => {
+            if (myId !== currentRenderId) return;
+            
+            let html = "";
+
+            // --- SECTION 1: 고유 코드 ---
+            html += `
+                <div class="section-divider">
+                    <span>■</span> ${data.name} Unique (${data.code})
+                </div>
+                <div class="gallery-grid">
+            `;
+            for (let i = scanStart; i <= scanEnd; i++) {
+                html += makeCard(data.folder, data.code, i, false);
+            }
+            html += `</div>`;
+
+            // --- SECTION 2: 공통 코드 (A_) ---
+            if (charKey !== 'ntr') {
+                html += `
+                    <div class="section-divider">
+                        <span>■</span> Common Actions (A_.)
+                    </div>
+                    <div class="gallery-grid">
+                `;
+                for (let i = scanStart; i <= scanEnd; i++) {
+                    html += makeCard(data.folder, "A_.", i, true); 
+                }
+                html += `</div>`;
+            }
+
+            contentDiv.innerHTML = html;
+        }, 50);
+    }
+
+    // 카드 생성 함수
+    function makeCard(folder, prefix, num, isCommon) {
+        const url = `${baseUrl}${folder}/${prefix}${num}.webp`;
+        const label = isCommon ? `A_.${num}` : `${prefix}${num}`;
+        
+        return `
+            <div class="img-card" onclick="showModal('${url}', '${label}')">
+                <img src="${url}" loading="lazy" 
+                     onerror="this.parentElement.style.display='none'" 
+                     alt="${label}">
+                <div class="label">${label}</div>
+            </div>
+        `;
+    }
+
+    // --- 모달 기능 ---
+    const modal = document.getElementById('imgModal');
+    const modalImg = document.getElementById('modalImg');
+    const captionText = document.getElementById('modalCaption');
+
+    function showModal(src, text) {
+        modal.style.display = "flex";
+        modalImg.src = src;
+        captionText.innerHTML = text;
+    }
+
+    function closeModal() {
+        modal.style.display = "none";
+        modalImg.src = "";
+    }
+
+    // ESC 닫기
+    document.addEventListener('keydown', function(event) {
+        if (event.key === "Escape") {
+            closeModal();
+        }
+    });
+
+</script>
+
+</body>
+</html>
