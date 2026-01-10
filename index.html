@@ -199,6 +199,7 @@
     <button onclick="renderView('baek')" id="btn-baek">백설아</button>
     <button onclick="renderView('jessica')" id="btn-jessica">제시카</button>
     <button onclick="renderView('ntr')" id="btn-ntr">NTR 모드</button>
+    <button onclick="renderView('tsntr')" id="btn-tsntr">NTR 성행위</button>
 </div>
 
 <div id="main-content">
@@ -222,7 +223,8 @@
         'kang': { name: '강태성', folder: 'A2', code: 'Kang_.' },
         'baek': { name: '백설아', folder: 'A3', code: 'Baek_.' },
         'jessica': { name: '제시카', folder: 'A4', code: 'Jessica_.' },
-        'ntr':  { name: 'NTR 상황', folder: 'A2', code: 'B_.' }
+        'ntr':  { name: 'NTR 상황', folder: 'A2', code: 'B_.' },
+        'tsntr': { name: 'TSNTR 성행위', folder: 'A2', code: 'AB_.' }
     };
 
     const scanStart = 1;
@@ -255,12 +257,12 @@
                 <div class="gallery-grid">
             `;
             for (let i = scanStart; i <= scanEnd; i++) {
-                html += makeCard(data.folder, data.code, i, false);
+                html += makeCard(data.folder, data.code, i);
             }
             html += `</div>`;
 
             // --- SECTION 2: 공통 코드 (A_) ---
-            if (charKey !== 'ntr') {
+            if (charKey !== 'ntr' && charKey !== 'tsntr') {
                 html += `
                     <div class="section-divider">
                         <span>■</span> Common Actions (A_.)
@@ -268,7 +270,7 @@
                     <div class="gallery-grid">
                 `;
                 for (let i = scanStart; i <= scanEnd; i++) {
-                    html += makeCard(data.folder, "A_.", i, true); 
+                    html += makeCard(data.folder, "A_.", i); 
                 }
                 html += `</div>`;
             }
@@ -278,9 +280,9 @@
     }
 
     // 카드 생성 함수
-    function makeCard(folder, prefix, num, isCommon) {
+    function makeCard(folder, prefix, num) {
         const url = `${baseUrl}${folder}/${prefix}${num}.webp`;
-        const label = isCommon ? `A_.${num}` : `${prefix}${num}`;
+        const label = `${prefix}${num}`;
         
         return `
             <div class="img-card" onclick="showModal('${url}', '${label}')">
