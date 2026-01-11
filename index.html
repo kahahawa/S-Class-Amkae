@@ -202,6 +202,7 @@
     <button onclick="renderView('soyoung')" id="btn-soyoung">소영</button>
     <button onclick="renderView('ntr')" id="btn-ntr">NTR 모드</button>
     <button onclick="renderView('tsntr')" id="btn-tsntr">TSNTR</button>
+    <button onclick="renderView('user')" id="btn-user">User</button>
 </div>
 
 <div id="main-content">
@@ -228,7 +229,8 @@
         'mina': { name: '미나', folder: 'A5', code: 'Mina_.' },
         'soyoung': { name: '소영', folder: 'A6', code: 'Soyoung_.' },
         'ntr':  { name: 'NTR 상황', folder: 'A2', code: 'B_.' },
-        'tsntr': { name: 'TSNTR 성행위', folder: 'A2', code: 'AB_.' }
+        'tsntr': { name: 'TSNTR 성행위', folder: 'A2', code: 'AB_.' },
+        'user': { name: 'User', folder: 'A2', code: 'Tsuser_.' }
     };
 
     const scanStart = 1;
@@ -267,7 +269,7 @@
             html += `</div>`;
 
             // --- SECTION 2: 공통 코드 (A_) ---
-            if (charKey !== 'ntr' && charKey !== 'tsntr') {
+            if (charKey !== 'ntr' && charKey !== 'tsntr' && charKey !== 'user') {
                 html += `
                     <div class="section-divider">
                         <span>■</span> Common Actions (A_.)
