@@ -234,9 +234,9 @@
         'ntr':  { name: 'NTR 상황', folder: 'A2', code: 'B_.' },
         'tsntr': { name: 'TSNTR 성행위', folder: 'A2', code: 'AB_.' },
         'user': { name: 'User', folder: 'A2', code: 'Tsuser_.' },
-        'tskang': { name: '강태희', folder: 'A2', code: 'Tskang_.' },
-        'rin': { name: '린', folder: 'A7', code: 'Rin_.' },
-        'isabella': { name: '이사벨라', folder: 'A8', code: 'Isabella_.' }
+        'tskang': { name: '강태희', folder: 'A7', code: 'Tskang_.' },
+        'rin': { name: '린', folder: 'A8', code: 'Rin_.' },
+        'isabella': { name: '이사벨라', folder: 'A9', code: 'Isabella_.' }
     };
 
     const scanStart = 1;
@@ -274,7 +274,8 @@
             html += `</div>`;
 
             // --- SECTION 2: 공통 코드 (A_) ---
-            if (charKey !== 'ntr' && charKey !== 'tsntr' && charKey !== 'user' && charKey !== 'tskang' && charKey !== 'rin' && charKey !== 'isabella') {
+            // NTR, TSNTR, User 모드일 때만 공통 액션 숨김 (나머지 캐릭터들은 표시)
+            if (charKey !== 'ntr' && charKey !== 'tsntr' && charKey !== 'user') {
                 html += `
                     <div class="section-divider">
                         <span>■</span> Common Actions (A_.)
