@@ -294,7 +294,9 @@
 
     // 카드 생성 함수
     function makeCard(folder, prefix, num) {
-        const url = `${baseUrl}${folder}/${prefix}${num}.webp`;
+        // 캐시 방지를 위한 버전 파라미터 추가
+        const v = new Date().getTime(); 
+        const url = `${baseUrl}${folder}/${prefix}${num}.webp?v=${v}`;
         const label = `${prefix}${num}`;
         
         return `
