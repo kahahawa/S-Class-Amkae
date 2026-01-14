@@ -203,6 +203,9 @@
     <button onclick="renderView('ntr')" id="btn-ntr">NTR 모드</button>
     <button onclick="renderView('tsntr')" id="btn-tsntr">TSNTR</button>
     <button onclick="renderView('user')" id="btn-user">User</button>
+    <button onclick="renderView('tskang')" id="btn-tskang">강태희</button>
+    <button onclick="renderView('rin')" id="btn-rin">린</button>
+    <button onclick="renderView('isabella')" id="btn-isabella">이사벨라</button>
 </div>
 
 <div id="main-content">
@@ -230,13 +233,15 @@
         'soyoung': { name: '소영', folder: 'A6', code: 'Soyoung_.' },
         'ntr':  { name: 'NTR 상황', folder: 'A2', code: 'B_.' },
         'tsntr': { name: 'TSNTR 성행위', folder: 'A2', code: 'AB_.' },
-        'user': { name: 'User', folder: 'A2', code: 'Tsuser_.' }
+        'user': { name: 'User', folder: 'A2', code: 'Tsuser_.' },
+        'tskang': { name: '강태희', folder: 'A2', code: 'Tskang_.' },
+        'rin': { name: '린', folder: 'A7', code: 'Rin_.' },
+        'isabella': { name: '이사벨라', folder: 'A8', code: 'Isabella_.' }
     };
 
     const scanStart = 1;
     const scanEnd = 120;
-    const commonScanEnd = 90;
-
+    
     let currentRenderId = 0;
 
     function renderView(charKey) {
@@ -269,14 +274,14 @@
             html += `</div>`;
 
             // --- SECTION 2: 공통 코드 (A_) ---
-            if (charKey !== 'ntr' && charKey !== 'tsntr' && charKey !== 'user') {
+            if (charKey !== 'ntr' && charKey !== 'tsntr' && charKey !== 'user' && charKey !== 'tskang' && charKey !== 'rin' && charKey !== 'isabella') {
                 html += `
                     <div class="section-divider">
                         <span>■</span> Common Actions (A_.)
                     </div>
                     <div class="gallery-grid">
                 `;
-                for (let i = scanStart; i <= commonScanEnd; i++) {
+                for (let i = scanStart; i <= scanEnd; i++) {
                     html += makeCard(data.folder, "A_.", i); 
                 }
                 html += `</div>`;
