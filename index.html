@@ -232,11 +232,11 @@
         'mina': { name: '미나', folder: 'A5', code: 'Mina_.' },
         'soyoung': { name: '소영', folder: 'A6', code: 'Soyoung_.' },
         'ntr':  { name: 'NTR 상황', folder: 'A2', code: 'B_.' },
-        'tsntr': { name: 'TSNTR 성행위', folder: 'A2', code: 'AB_.' },
+        'tsntr': { name: 'TSNTR 성행위', folder: 'A2', code: 'AB_.', start: 21 },
         'user': { name: 'User', folder: 'A7', code: 'Tsuser_.' },
         'tskang': { name: '강태희', folder: 'A8', code: 'Tskang_.' },
-        'rin': { name: '린', folder: 'A9', code: 'Rin_.' },
-        'isabella': { name: '이사벨라', folder: 'A10', code: 'Isabella_.' }
+        'rin': { name: '린', folder: 'A10', code: 'Rin_.' },
+        'isabella': { name: '이사벨라', folder: 'A9', code: 'Isabella_.' }
     };
 
     const scanStart = 1;
@@ -256,6 +256,9 @@
         currentRenderId++;
         const myId = currentRenderId;
 
+        // 시작 번호 설정 (개별 설정이 있으면 그 값 사용, 없으면 scanStart)
+        const currentStart = data.start || scanStart;
+
         setTimeout(() => {
             if (myId !== currentRenderId) return;
             
@@ -268,7 +271,7 @@
                 </div>
                 <div class="gallery-grid">
             `;
-            for (let i = scanStart; i <= scanEnd; i++) {
+            for (let i = currentStart; i <= scanEnd; i++) {
                 html += makeCard(data.folder, data.code, i);
             }
             html += `</div>`;
