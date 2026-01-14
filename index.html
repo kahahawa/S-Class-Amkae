@@ -233,10 +233,10 @@
         'soyoung': { name: '소영', folder: 'A6', code: 'Soyoung_.' },
         'ntr':  { name: 'NTR 상황', folder: 'A2', code: 'B_.' },
         'tsntr': { name: 'TSNTR 성행위', folder: 'A2', code: 'AB_.' },
-        'user': { name: 'User', folder: 'A2', code: 'Tsuser_.' },
-        'tskang': { name: '강태희', folder: 'A7', code: 'Tskang_.' },
-        'rin': { name: '린', folder: 'A8', code: 'Rin_.' },
-        'isabella': { name: '이사벨라', folder: 'A9', code: 'Isabella_.' }
+        'user': { name: 'User', folder: 'A7', code: 'Tsuser_.' },
+        'tskang': { name: '강태희', folder: 'A8', code: 'Tskang_.' },
+        'rin': { name: '린', folder: 'A9', code: 'Rin_.' },
+        'isabella': { name: '이사벨라', folder: 'A10', code: 'Isabella_.' }
     };
 
     const scanStart = 1;
@@ -302,7 +302,6 @@
         return `
             <div class="img-card" onclick="showModal('${url}', '${label}')">
                 <img src="${url}" loading="lazy" 
-                     onerror="this.parentElement.style.display='none'" 
                      alt="${label}">
                 <div class="label">${label}</div>
             </div>
